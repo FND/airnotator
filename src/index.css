@@ -42,6 +42,9 @@ body > .site-header + * {
 
 /* air-vid */
 
+air-vid {
+	position: relative;
+}
 air-vid.is-fullscreen {
 	display: flex;
 	overflow: auto;
@@ -54,11 +57,24 @@ air-vid video {
 	max-height: 100vh;
 	background-color: #000;
 }
+air-vid.is-annotating video {
+	border: thick double #32A1CE;
+}
+
+air-vid canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+air-vid:not(.is-annotating) canvas {
+	display: none;
+}
 
 air-vid .controls {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	padding: 0.2em 0; /* required for button effect */
 }
 
 air-vid .controls button {
@@ -85,4 +101,8 @@ air-vid .controls button:not(:disabled):active {
 
 air-vid .controls button[name=fullscreen]::before {
 	content: "🎦 ";
+}
+
+air-vid .controls button[name=annotate]::before {
+	content: "🖌️ ";
 }

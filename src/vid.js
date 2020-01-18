@@ -1,4 +1,6 @@
 /* eslint-env browser */
+import Whiteboard from "./board.js";
+
 let COMMANDS = {
 	fullscreen: self => {
 		if(document.fullscreenElement) {
@@ -7,6 +9,12 @@ let COMMANDS = {
 			self.requestFullscreen();
 		}
 		self.refresh(); // XXX: apparent race condition; use resize event instead?
+	},
+	annotate: self => {
+		let active = self.classList.toggle("is-annotating");
+		if(active) {
+			self.refresh();
+		}
 	},
 	"media-file": (self, field) => {
 		let file = field.files[0];
@@ -21,7 +29,9 @@ let COMMANDS = {
 
 export default class AirVid extends HTMLElement {
 	connectedCallback() {
-		this._vid = document.querySelector("video");
+		let vid = this._vid = document.querySelector("video");
+		let board = this._board = new Whiteboard(vid);
+		this.appendChild(board.el);
 
 		let controls = this.querySelector(".controls");
 		controls.addEventListener("click", this.onClick.bind(this));
@@ -54,6 +64,10 @@ export default class AirVid extends HTMLElement {
 			return;
 		}
 		cmd(this, ...args);
+	}
+
+	refresh() {
+		this._board.sync();
 	}
 }
 
