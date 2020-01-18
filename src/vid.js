@@ -19,6 +19,19 @@ let COMMANDS = {
 	reset: self => {
 		self._board.clear();
 	},
+	speed: (self, el) => {
+		// TODO: sync button and field states
+		let cls = "is-selected";
+		let container = el.parentNode; // XXX: tight coupling
+		container.querySelectorAll(`.${cls}`).forEach(el => {
+			el.classList.remove(cls);
+		});
+		if(el.nodeName === "BUTTON") {
+			el.classList.add(cls);
+		}
+
+		self.speed = parseFloat(el.value);
+	},
 	color: self => {
 		self.color = self.color; // eslint-disable-line no-self-assign
 	},
@@ -55,7 +68,7 @@ export default class AirVid extends HTMLElement {
 	onClick(ev) {
 		let el = ev.target;
 		if(el.matches("button[name]")) { // event delegation
-			this.exec(el.name);
+			this.exec(el.name, el);
 		}
 	}
 
@@ -77,6 +90,10 @@ export default class AirVid extends HTMLElement {
 
 	refresh() {
 		this._board.sync();
+	}
+
+	set speed(rate) {
+		this._vid.playbackRate = rate;
 	}
 
 	get color() {

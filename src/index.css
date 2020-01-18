@@ -81,6 +81,14 @@ air-vid .controls {
 	padding: 0.2em 0; /* required for button effect */
 }
 
+air-vid .controls input[type=number] {
+	width: 3em;
+	padding-left: 0.2em;
+	font-size: 1em;
+	color: #FFF;
+	background-color: #333;
+}
+
 air-vid .controls button {
 	border: 1px solid #AAA;
 	border-radius: 0.5em;
@@ -121,10 +129,10 @@ air-vid .controls button[name=reset]::before {
 	content: "🗑️ ";
 }
 
-air-vid .controls input[name=brush] {
-	width: 3em;
-	padding-left: 0.2em;
-	font-size: 1em;
-	color: #FFF;
-	background-color: #333;
+air-vid .controls button[name=speed]::before {
+	content: "× ";
+	font-size: inherit;
+}
+air-vid .controls button[name=speed].is-selected {
+	border-width: 2px;
 }
