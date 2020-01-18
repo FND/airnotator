@@ -55,6 +55,7 @@ export default class Whiteboard {
 		this.sync();
 
 		let ctx = this._scene = el.getContext("2d", { desynchronized: true });
+		ctx.beginPath();
 		ctx.strokeStyle = this.color;
 		ctx.lineWidth = this.brush;
 		this._lastPos = this.relPos(ev.clientX, ev.clientY);
@@ -67,7 +68,6 @@ export default class Whiteboard {
 
 		this.render(this.relPos(ev.clientX, ev.clientY));
 		this._lastPos = null;
-		this._box = null;
 	}
 
 	onPointerMove(ev) {
@@ -81,6 +81,15 @@ export default class Whiteboard {
 		ctx.moveTo(prev.x, prev.y);
 		ctx.lineTo(x, y);
 		ctx.stroke();
+	}
+
+	clear() {
+		let box = this._box;
+		if(!box) {
+			return;
+		}
+		let { width, height } = box;
+		this._scene.clearRect(0, 0, width, height);
 	}
 
 	relPos(x, y) {

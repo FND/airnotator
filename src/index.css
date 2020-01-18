@@ -107,8 +107,18 @@ air-vid .controls button[name=fullscreen]::before {
 	content: "🎦 ";
 }
 
+air-vid .controls button[name=annotate] {
+	margin-right: 0.5em;
+}
 air-vid .controls button[name=annotate]::before {
 	content: "🖌️ ";
+}
+
+air-vid .controls button[name=reset] {
+	margin-right: 0.5em;
+}
+air-vid .controls button[name=reset]::before {
+	content: "🗑️ ";
 }
 
 air-vid .controls input[name=brush] {

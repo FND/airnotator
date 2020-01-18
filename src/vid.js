@@ -16,6 +16,9 @@ let COMMANDS = {
 			self.refresh();
 		}
 	},
+	reset: self => {
+		self._board.clear();
+	},
 	color: self => {
 		self.color = self.color; // eslint-disable-line no-self-assign
 	},
