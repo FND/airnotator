@@ -129,6 +129,13 @@ air-vid .controls button[name=reset]::before {
 	content: "🗑️ ";
 }
 
+air-vid .controls button[name=playback] {
+	margin-right: 0.5em;
+}
+air-vid .controls button[name=playback]::before {
+	content: "🎥 ";
+}
+
 air-vid .controls button[name=speed]::before {
 	content: "× ";
 	font-size: inherit;

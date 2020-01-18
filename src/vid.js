@@ -19,6 +19,15 @@ let COMMANDS = {
 	reset: self => {
 		self._board.clear();
 	},
+	playback: (self, btn) => {
+		let vid = self._vid;
+		if(!vid.duration) { // XXX: crude protection
+			return;
+		}
+		let { paused } = vid;
+		vid[paused ? "play" : "pause"]();
+		btn.textContent = paused ? "⏸️" : "▶️"; // TODO: sync state with native controls
+	},
 	speed: (self, el) => {
 		// TODO: sync button and field states
 		let cls = "is-selected";
