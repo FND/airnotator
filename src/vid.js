@@ -16,6 +16,12 @@ let COMMANDS = {
 			self.refresh();
 		}
 	},
+	color: self => {
+		self.color = self.color; // eslint-disable-line no-self-assign
+	},
+	brush: self => {
+		self.brush = self.brush; // eslint-disable-line no-self-assign
+	},
 	"media-file": (self, field) => {
 		let file = field.files[0];
 		let vid = self._vid;
@@ -30,10 +36,10 @@ let COMMANDS = {
 export default class AirVid extends HTMLElement {
 	connectedCallback() {
 		let vid = this._vid = document.querySelector("video");
-		let board = this._board = new Whiteboard(vid);
+		let controls = this._controls = this.querySelector(".controls");
+		let board = this._board = new Whiteboard(this.color, this.brush, vid);
 		this.appendChild(board.el);
 
-		let controls = this.querySelector(".controls");
 		controls.addEventListener("click", this.onClick.bind(this));
 		controls.addEventListener("change", this.onChange.bind(this));
 		document.addEventListener("fullscreenchange", onFullscreen);
@@ -68,6 +74,23 @@ export default class AirVid extends HTMLElement {
 
 	refresh() {
 		this._board.sync();
+	}
+
+	get color() {
+		return this._controls.querySelector("input[name=color]").value;
+	}
+
+	set color(value) {
+		this._board.color = value;
+	}
+
+	get brush() {
+		let value = this._controls.querySelector("input[name=brush]").value;
+		return parseInt(value, 10);
+	}
+
+	set brush(value) {
+		this._board.brush = value;
 	}
 }
 

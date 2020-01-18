@@ -70,9 +70,13 @@ air-vid:not(.is-annotating) canvas {
 	display: none;
 }
 
-air-vid .controls {
+air-vid .controls,
+air-vid .controls div {
 	display: flex;
 	align-items: center;
+}
+
+air-vid .controls {
 	justify-content: space-evenly;
 	padding: 0.2em 0; /* required for button effect */
 }
@@ -105,4 +109,12 @@ air-vid .controls button[name=fullscreen]::before {
 
 air-vid .controls button[name=annotate]::before {
 	content: "🖌️ ";
+}
+
+air-vid .controls input[name=brush] {
+	width: 3em;
+	padding-left: 0.2em;
+	font-size: 1em;
+	color: #FFF;
+	background-color: #333;
 }

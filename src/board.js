@@ -1,8 +1,7 @@
 export default class Whiteboard {
-	constructor(refNode) {
-		// XXX: hard-coded values
-		this.color = "#F0F";
-		this.stroke = 2;
+	constructor(color, brush, refNode) {
+		this.color = color;
+		this.brush = brush;
 
 		let cv = this.el = document.createElement("canvas");
 		this._ref = refNode;
@@ -57,7 +56,7 @@ export default class Whiteboard {
 
 		let ctx = this._scene = el.getContext("2d", { desynchronized: true });
 		ctx.strokeStyle = this.color;
-		ctx.lineWidth = this.stroke;
+		ctx.lineWidth = this.brush;
 		this._lastPos = this.relPos(ev.clientX, ev.clientY);
 	}
 
