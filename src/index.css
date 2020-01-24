@@ -77,9 +77,19 @@ air-vid .controls div {
 }
 
 air-vid .controls {
+	flex-wrap: wrap;
 	justify-content: space-evenly;
 	padding: 0.2em 0; /* required for button effect */
 }
+
+air-vid .controls air-vid-seeker {
+	flex: 0 0 100%;
+	padding: 1em;
+}
+
+	air-vid-seeker input[type=range] {
+		width: 100%;
+	}
 
 air-vid .controls input[type=number] {
 	width: 3em;
